@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Khai Thác Vàng</title>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(180deg, #FFE4B5 0%, #FFFACD 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+        .error-message {
+            text-align: center;
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .error-message h1 {
+            color: #FF5733;
+            font-size: 28px;
+            margin-bottom: 20px;
+        }
+        .error-message p {
+            color: #666;
+            font-size: 16px;
+        }
+        .header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #DAA520;
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            color: #666;
+            font-size: 16px;
+        }
+        .stats-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .stats-card .coins {
+            font-size: 48px;
+            font-weight: bold;
+            color: #DAA520;
+            margin-bottom: 5px;
+        }
+        .stats-card .label {
+            font-size: 18px;
+            color: #666;
+        }
+        .level-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 25px;
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        .level-card .level-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 10px;
+        }
+        .level-card .level-value {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2ECC71;
+            margin-bottom: 10px;
+        }
+        .level-card .level-cost {
+            font-size: 14px;
+            color: #888;
+        }
+        .btn {
+            width: 100%;
+            max-width: 400px;
+            height: 60px;
+            border: none;
+            border-radius: 30px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(255,165,0,0.4);
+        }
+        .btn-ad {
+            background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+        }
+        .btn-ad:active {
+            transform: scale(0.98);
+            opacity: 0.9;
+        }
+        .btn-ad .icon {
+            margin-right: 10px;
+        }
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="error-section" class="error-message hidden">
+        <h1>❌ Không thể mở!</h1>
+        <p>Mini App này chỉ mở được trong Telegram thôi nhé!</p>
+    </div>
+
+    <div id="main-section" class="hidden">
+        <div class="header">
+            <h1>⛏️ Khai Thác Vàng</h1>
+            <p>Xem quảng cáo nhận xu!</p>
+        </div>
+
+        <div class="stats-card">
+            <div class="coins" id="coins">100</div>
+            <div class="label">💎 Xu của bạn</div>
+        </div>
+
+        <div class="level-card">
+            <div class="level-title">👷 Cấp độ thợ mỏ</div>
+            <div class="level-value" id="level">Lv. 1</div>
+            <div class="level-cost" id="levelCost">Chi phí nâng cấp: 15 xu</div>
+        </div>
+
+        <button class="btn btn-ad" onclick="watchAd()">
+            <span class="icon">🎬</span> Xem quảng cáo nhận 10 xu
+        </button>
+    </div>
+
+    <script>
+        let coins = parseInt(localStorage.getItem('coins')) || 100;
+        let level = parseInt(localStorage.getItem('level')) || 1;
+        
+        // Kiểm tra xem có đang trong Telegram không
+        function isTelegramWebApp() {
+            return typeof window.Telegram !== 'undefined' && window.Telegram.WebApp;
+        }
+        
+        function updateUI() {
+            document.getElementById('coins').textContent = coins.toLocaleString();
+            document.getElementById('level').textContent = 'Lv. ' + level;
+            document.getElementById('levelCost').textContent = 'Chi phí nâng cấp: ' + (level * 15) + ' xu';
+        }
+        
+        function watchAd() {
+            // Thay YOUR_ADSGRAM_ID bằng ID của bạn
+            const adsgramUrl = 'https://adsgram.io/iframe/YOUR_ADSGRAM_ID';
+            alert('Đang mở AdsGram... (Thay YOUR_ADSGRAM_ID trong code để tích hợp thật!)');
+            // Giả định xem quảng cáo xong nhận 10 xu
+            coins += 10;
+            localStorage.setItem('coins', coins);
+            updateUI();
+            alert('🎉 Bạn đã nhận được 10 xu!');
+        }
+        
+        // Chạy khi trang load xong
+        window.onload = function() {
+            if (!isTelegramWebApp()) {
+                document.getElementById('error-section').classList.remove('hidden');
+                document.getElementById('main-section').classList.add('hidden');
+            } else {
+                document.getElementById('error-section').classList.add('hidden');
+                document.getElementById('main-section').classList.remove('hidden');
+                updateUI();
+            }
+        };
+    </script>
+</body>
+</html>

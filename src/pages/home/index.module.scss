@@ -1,0 +1,100 @@
+@use '@/styles/variables.scss' as *;
+
+.container {
+  min-height: 100vh;
+  background: linear-gradient(180deg, #FFE4B5 0%, #FFFACD 100%);
+  padding: $page-padding;
+  padding-bottom: 120rpx;
+}
+
+.header {
+  text-align: center;
+  padding: 48rpx 0;
+}
+
+.title {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: #DAA520;
+  margin-bottom: 16rpx;
+}
+
+.subtitle {
+  font-size: 28rpx;
+  color: $color-text-secondary;
+}
+
+.statsCard {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: $radius-lg;
+  padding: 48rpx;
+  margin-bottom: 32rpx;
+  box-shadow: $shadow-card;
+  text-align: center;
+}
+
+.coinsAmount {
+  font-size: 64rpx;
+  font-weight: 700;
+  color: #DAA520;
+  margin-bottom: 8rpx;
+}
+
+.coinsLabel {
+  font-size: 28rpx;
+  color: $color-text-secondary;
+}
+
+.levelCard {
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: $radius-lg;
+  padding: 48rpx;
+  margin-bottom: 32rpx;
+  box-shadow: $shadow-card;
+  text-align: center;
+}
+
+.levelTitle {
+  font-size: 32rpx;
+  font-weight: 600;
+  color: $color-text-primary;
+  margin-bottom: 16rpx;
+}
+
+.levelValue {
+  font-size: 48rpx;
+  font-weight: 700;
+  color: $color-secondary;
+  margin-bottom: 16rpx;
+}
+
+.levelUpCost {
+  font-size: 24rpx;
+  color: $color-text-tertiary;
+}
+
+.watchAdButton {
+  @include button-reset;
+  width: 100%;
+  height: 96rpx;
+  background: linear-gradient(135deg, #FFD700 0%, #FFA500 100%);
+  border-radius: $radius-button;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32rpx;
+  font-weight: 600;
+  color: #fff;
+  box-shadow: 0 8rpx 24rpx rgba(255, 165, 0, 0.3);
+  transition: all $transition-base;
+
+  &:active {
+    opacity: 0.9;
+    transform: scale(0.98);
+  }
+}
+
+.buttonIcon {
+  margin-right: 12rpx;
+  font-size: 36rpx;
+}
