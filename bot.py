@@ -30,16 +30,10 @@ def send_welcome(message):
         user_data[user_id] = {'points': 0}
         save_user_data(user_data)
     
-    # Tạo nút mở Mini App trong Telegram
-    keyboard = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True, one_time_keyboard=False)
-    web_app = telebot.types.WebAppInfo(MINI_APP_URL)
-    btn1 = telebot.types.KeyboardButton("🎮 Mở Mini App Khai Thác Vàng", web_app=web_app)
-    keyboard.add(btn1)
-    
+    # Xóa nút cũ, chỉ hiện lời chào
     bot.send_message(
         message.chat.id,
-        f"Chào bạn {message.from_user.first_name}! 👋\n\nNhấp vào nút dưới để mở Mini App trong Telegram nhé!",
-        reply_markup=keyboard
+        f"Chào bạn {message.from_user.first_name}! 👋\n\nNhấp vào nút 🎮 Khai Thác Vàng ở góc phải bàn phím để mở Mini App nhé!"
     )
 
 if __name__ == '__main__':
